@@ -37,6 +37,24 @@ FROM countryLanguage cl
 JOIN country co
 ON co.code = cl.CountryCode
 WHERE co.region = 'Caribbean';
+
+-- left join 이용
+SELECT DISTINCT cl.Language
+FROM country co 
+LEFT JOIN countryLanguage cl
+ON co.Code = cl.countryCode
+WHERE co.region = 'Caribbean';
+
+-- (4) 소통되는 언어가 명시되어 있지 않은 국가의 코드, 이름
+SELECT code, name 
+FROM country
+WHERE code NOT IN (SELECT distinct countryCode FROM countrylanguage);
+
+-- (5) 다른도시지만 동일 명칭의 도시들의 쌍에 대해 각각 ID와 이름 구하기
+SELECT c1.Name, c1.ID, c2.ID
+FROM city c1, city c2
+WHERE c1.ID <> c2.ID and c1.Name = c2.Name
+ORDER BY 1, 2, 3 DESC;
  
  
  
