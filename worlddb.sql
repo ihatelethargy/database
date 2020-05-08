@@ -25,10 +25,18 @@ WHERE co.Name = 'China';
  FROM Country
  WHERE Population = (SELECT MIN(Population) FROM country);
  
+ -- (3) Caribbean 지역의 모든 언어 
+ -- Caribbean 지역의 국가 코드
+ SELECT Code,Name 
+ FROM country
+ WHERE region = 'Caribbean';
  
- 
- 
- 
+ -- Caribbean 지역 언어
+SELECT DISTINCT cl.Language
+FROM countryLanguage cl
+JOIN country co
+ON co.code = cl.CountryCode
+WHERE co.region = 'Caribbean';
  
  
  
