@@ -25,5 +25,11 @@ ON s.title_id = t.title_id
 GROUP BY t.title;
 
 
--- (4) 단독 저자에 의해 저술된 책 이름을 구하시오.
+-- **(4) 단독 저자에 의해 저술된 책 이름을 구하시오. (먼저 묶고 HAVING)
+SELECT t.title AS '단독저자'
+FROM titles t
+JOIN titleauthor ta
+ON t.title_id = ta.title_id
+GROUP BY t.title
+HAVING COUNT(ta.au_id) = 1;
 
