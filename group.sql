@@ -33,3 +33,24 @@ ON t.title_id = ta.title_id
 GROUP BY t.title
 HAVING COUNT(ta.au_id) = 1;
 
+-- RE ** (5) 가장 많은 책을 저술한 저자의 이름('first name last name'의 형태)을 구하시오.
+SELECT ta.au_id, CONCAT(a.au_fname, ' ', a.au_lname) AS '저자', ta.title_id, count(ta.au_id)
+FROM titleauthor ta
+JOIN authors a
+ON ta.au_id = a.au_id
+GROUP BY a.au_id
+HAVING COUNT(ta.au_id)
+ORDER BY 4 DESC
+LIMIT 1;
+
+USE pubs;
+
+
+
+
+
+
+
+
+
+
