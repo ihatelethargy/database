@@ -1,7 +1,7 @@
 USE pubs;
 
 -- *(1) 현재 직원(employee)는 출판사에 관계없이 하나의 테이블에 저장되어 있다. 각 출판사 명 별 직원 수를 구하시오. 단 출판사 이름은 유일하지 않다고 가정합니다.
-
+-- gruop by 를 하면 이름 같아도 합쳐져 버린다...
 SELECT p.pub_name , count(e.emp_id)
 FROM publishers p
 JOIN employee e
@@ -43,11 +43,23 @@ HAVING COUNT(ta.au_id)
 ORDER BY 4 DESC
 LIMIT 1;
 
-USE pubs;
+USE classicmodels;
+
+-- (1) 2004년도 매출 실적을 월별로 계산하려고 한다. 이를 구하는 SQL문을 쓰시오. 매출을 계산할 때 날짜는 주문 날짜를 기준으로 계산한다.
+SELECT MONTH(paymentDate), amount
+FROM payments
+WHERE YEAR(paymentDate) = 2004
+GROUP BY MONTH(paymentDate)
+ORDER BY 1;
+
+-- (2) 고객 회사들에 대해 매출 성향을 분석하려고 한다. 각 고객 회사에 대해 회사명, 주문 회수, 평균 주문 금액, 최대 주문 금액을 구하시오. 
+SELECT of.officecode,  AVG(p.amount), MAX(p.amount)
+FROM offices of
+JOIN payment p
+ON p.customercode = 
 
 
-
-
+-- (3) 가장 많은 주문 금액의 주문의 고객회사 명, 주문 날짜, 주문금액을 구하시오.
 
 
 
